@@ -1,4 +1,4 @@
-import Artwork from "../models/artwork"
+import Artwork from "../models/artworkModel"
 
 export async function getArtworks(req){
     if(req.query.offset)
