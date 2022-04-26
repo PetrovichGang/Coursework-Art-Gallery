@@ -5,7 +5,7 @@ export async function getArtworks(req){
     if(req.query.offset)
         return await Artwork.findAll({ limit: 5, offset: ((+req.query.offset ?? 0) -1 ) * 5, include: [{ model: Artist }] })
     else
-        return await Artwork.findAll({include: [{ model: Artist }]})
+        return await Artwork.findAll({ include: [{ model: Artist }] })
 }
 export async function getArtworkById(req){
     return await Artwork.findAll({ where: { id: req.params.id } })
