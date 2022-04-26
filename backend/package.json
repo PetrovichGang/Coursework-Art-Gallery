@@ -13,6 +13,7 @@
   "dependencies": {
     "fastify": "^3.28.0",
     "fastify-cors": "^6.0.3",
+    "mariadb": "^3.0.0",
     "sequelize": "^6.19.0"
   }
 }
