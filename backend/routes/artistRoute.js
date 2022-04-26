@@ -10,10 +10,10 @@ export async function getArtistById(req){
     return await Artist.findAll({ where: { id: req.params.id } })
 }
 export async function deleteArtistById(req){
-    return await Artist.destroy({ where: { id: req.params.id }})
+    return await Artist.destroy({ where: { id: req.params.id } })
 }
 export async function deleteArtists(){
-    return await Artist.destroy({where: {}})
+    return await Artist.destroy({ where: {} })
 }
 export async function updateArtist(req) {
     return await Artist.update(req.body, { where: { id: req.params.id } })
