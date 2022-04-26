@@ -1,6 +1,10 @@
 export const CONFIG = {
-    IP: "localhost",
-    PORT: "3000",
-    DATABASE_NAME: "art_gallery",
-    MODE: "dev"
+    connectionString: {
+		dev: 'mariadb://root@localhost/the',
+		test: 'mariadb://root@localhost/test'
+	},
+	mode: 'dev',
+	website: 'localhost',
+	ip: 'localhost',
+	port: 3000
 }
