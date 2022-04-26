@@ -3,7 +3,7 @@ import { CONFIG } from "./config.js"
 import { fastify as init} from "fastify"
 import fastifyCors from "fastify-cors"
 
-import { db } from "./models/db"
+import { db } from "./models/database"
 import * as artworkRoute from "./routes/artworkRoute"
 
 export const fastify = init({ logger: CONFIG.logger })

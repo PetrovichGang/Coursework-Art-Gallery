@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize"
-import { db } from "./db"
+import { db } from "./database"
 
 export const Artwork = db.define('Artwork', {
     id: { type: DataTypes.INTEGER, allowNull: false, autoIncrement: true, primaryKey: true },
@@ -10,4 +10,5 @@ export const Artwork = db.define('Artwork', {
     sizeX: { type: DataTypes.DOUBLE, allowNull: false },
     sizeY: { type: DataTypes.DOUBLE, allowNull: false },
     picture: { type: DataTypes.STRING, allowNull: false },
+    location: { type: DataTypes.STRING, allowNull: false }
 }, { timestamps: false })
