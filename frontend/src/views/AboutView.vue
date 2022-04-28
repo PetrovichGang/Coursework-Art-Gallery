@@ -1,6 +1,7 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h1>О нас</h1>
+    <span>Мы создали эту онлайн галерею для самовырожения всех возможных авторов без каких-либо ограничений</span>
   </div>
 </template>
 
