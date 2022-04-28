@@ -21,10 +21,10 @@ const router = createRouter({
             component: () => import("./views/AboutView.vue"),
         },
         {
-            path: "/product/:id",
+            path: "/art/:id",
             name: "Информация",
             meta: { hide: true },
-            component: () => import("./views/ProductView.vue"),
+            component: () => import("./views/ArtView.vue"),
         },
     ],
 });

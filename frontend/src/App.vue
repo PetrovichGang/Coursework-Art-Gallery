@@ -1,39 +1,54 @@
 <script setup>
-import { RouterLink, RouterView, useRoute, useRouter } from "vue-router"
-import { computed } from 'vue'
+import { RouterLink, RouterView, useRoute, useRouter } from "vue-router";
+import { computed } from "vue";
 
-const routes = computed(() => useRouter().getRoutes().filter(r => !r?.meta?.hide))
-const currentRoute = computed(() => useRoute().path)
+const routes = computed(() =>
+  useRouter()
+    .getRoutes()
+    .filter((r) => !r?.meta?.hide)
+);
+
+const currentRoute = computed(() => useRoute().path);
 </script>
 
 <template>
-  <header>
-    <nav>
-      <div class="logo-text">
-        <img alt="TV logo" class="logo" src="@/assets/logo.svg" width="36" height="36" />
-        <div :style="{ lineHeight: 0.9 }">
-          <span>ArtStoichev</span><br>
-          <span :style="{ fontWeight: 300, fontSize: '0.75rem' }">Картинная галерея</span>
+  <div>
+    <header>
+      <nav>
+        <div class="logo">
+          <img
+            alt="ArtStoichev"
+            src="@/assets/logo.svg"
+            width="36"
+            height="36"
+          />
+          <div>
+            <h1>ArtStoichev</h1>
+            <span>Картинная галерея</span>
+          </div>
         </div>
-      </div>
 
-      <div class="search">
-        <img  src="@/assets/search.svg" width="24" height="24" />
-        <input type="text" />
-      </div>
+        <div class="search">
+          <img src="@/assets/search.svg" width="24" height="24" />
+          <input type="text" />
+        </div>
 
-      <div class="links">
-        <RouterLink
-          v-for="route of routes"
-          :class="{ active: currentRoute == route.path }"
-          :to="route.path"
-        >{{ route.name }}</RouterLink>
+        <div class="links">
+          <RouterLink
+            v-for="route of routes"
+            :to="route.path"
+            :class="{ active: currentRoute == route.path }"
+            :key="route.path"
+          >
+            {{ route.name }}
+          </RouterLink>
+        </div>
+      </nav>
+    </header>
+    <div class="main-content">
+      <div>
+        <RouterView />
       </div>
-    </nav>
-  </header>
-  <div class="main-content">
-    <div>
-      <RouterView />
     </div>
   </div>
 </template>
@@ -48,8 +63,8 @@ input {
 body {
   font-size: 15px;
   text-rendering: optimizeLegibility;
-  background: #161819;
-  color: #fff
+  background: var(--dark-0);
+  color: #fff;
 }
 
 * {
@@ -57,7 +72,13 @@ body {
 }
 
 :root {
-  --accent: #008dd4
+  --accent: #008dd4;
+  --dark-0: #161819;
+  --dark-1: #202124;
+  --dark-1-trans: #20212488;
+  --dark-2: #313235;
+  --dark-3: #424346;
+  --dark-4: #535457;
 }
 </style>
 
@@ -70,26 +91,47 @@ header {
   height: 72px;
   display: flex;
   justify-content: center;
-  background: #202124;/*
-  border-bottom: 1px solid #ddd;*/
+  background: var(--dark-1-trans);
   backdrop-filter: blur(10px);
-  color: #fff;
-  box-shadow: 0 0 4px #0002;
+  box-shadow: 0 0 4px #000;
 }
-.logo-text {
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo div {
+  line-height: 0.9;
+}
+
+.logo h1 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.logo span {
+  font-weight: 300;
+  font-size: 0.75rem;
+}
+
+.logo img {
   display: flex;
   align-items: center;
   font-weight: 600;
   font-size: 20px;
   gap: 14px;
 }
+
 .links {
   display: flex;
   gap: 8px;
   flex-shrink: 0;
 }
+
 .search {
-  background: #303234;
+  background: var(--dark-2);
   color: #fff;
   box-shadow: 0 2px 8px #0002;
   margin: 0 12px;
@@ -121,14 +163,14 @@ header {
 }
 
 .links a.active {
-  background: #404449;
-  border-bottom: 1px solid #555;
+  background: var(--dark-3);
+  border-bottom: 1px solid var(--dark-4);
 }
 
 header > nav {
   display: flex;
   align-items: center;
-  width: 1600px;
+  width: 1400px;
   height: 100%;
   justify-content: space-between;
   padding: 0 8px 0 16px;
@@ -137,12 +179,12 @@ header > nav {
 .main-content {
   display: flex;
   justify-content: center;
-  margin-top: 72px
+  margin-top: 72px;
 }
 
 .main-content > div {
   margin-top: 24px;
-  width: 1600px;
+  width: 1400px;
   display: flex;
 }
 </style>

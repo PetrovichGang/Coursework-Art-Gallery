@@ -1,37 +1,40 @@
 <script setup>
-import { RouterLink } from "vue-router";
+import { useRoute } from "vue-router";
 import { onMounted, ref } from "vue";
+import { computed } from "vue";
 
-const arts = ref(null);
+const art = ref(null);
 const error = ref(null);
+const id = computed(() => useRoute().params.id);
 
 onMounted(() => {
-  fetch("http://localhost:3000/artwork")
+  fetch(`http://localhost:3000/artwork/${id.value}`)
     .then((x) => x.json())
-    .then((x) => (arts.value = x))
+    .then((x) => (art.value = x[0]))
     .catch((x) => (error.value = x));
 });
 </script>
 
 <template>
   <div class="split">
-    <section>
-      <h1></h1>
-      <div>
-        <input />
-      </div>
-    </section>
-    <section v-if="arts">
-      <h1>
-        Картины <small>{{ arts?.length }}</small>
-      </h1>
+    <section v-if="art">
       <div class="grid">
-        <div v-for="art of arts" :key="art" class="item">
-          <RouterLink :to="`/art/${art.id}`">
-            <img :src="art.image" alt="" srcset="" />
-            <span class="title">{{ art.name }}</span>
-            <span class="author">{{ art.Author }}</span>
-          </RouterLink>
+        <img :src="art.image" alt="" />
+        <div>
+          <h1>{{ art.name }}</h1>
+          <div>
+            <i>Размер: </i><span>{{ `${art.sizeX}x${art.sizeY}` }}</span>
+          </div>
+          <div>
+            <i>Автор: </i><span class="author">{{ art.Author }}</span>
+          </div>
+          <div>
+            <i>Расположено в: </i><span>{{ art.location }}</span>
+          </div>
+          <div>
+            <i>Создана: </i><span>{{ new Date(art.created_date).toLocaleDateString() }}</span>
+          </div>
+          <span>{{ art.description }}</span>
         </div>
       </div>
     </section>
@@ -41,7 +44,7 @@ onMounted(() => {
     </section>
     <section v-else class="loading">
       <img
-        alt="loading logo"
+        alt="load logo"
         src="@/assets/logo-load.svg"
         width="72"
         height="72"
@@ -51,16 +54,14 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.item a {
+.item {
   display: flex;
   flex-direction: column;
   border-radius: 8px;
-  background: #303234;
-  padding: 0px;
-  color: #fff;
-  border: 1px solid #555;
+  background: #fff;
+  padding: 24px;
+  border: 1px solid #ddd;
   gap: 10px;
-  text-decoration: none;
 }
 
 .grid {
@@ -71,7 +72,6 @@ onMounted(() => {
 }
 
 .title {
-  margin: 8px 18px 0;
   font-weight: 600;
   font-size: 1.25rem;
 }
@@ -109,8 +109,14 @@ small {
 }
 
 img {
-  width: 320px;
-  object-fit: contain;
-  height: 250px;
+  width: 500px;
+}
+
+i {
+  opacity: 0.75;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  padding-right: 8px;
+  line-height: 2;
 }
 </style>
