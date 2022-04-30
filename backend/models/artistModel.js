@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize"
 import { db } from "./database.js"
 
-const Artist = db.define('Artist', {
+const Artist = db.define('artist', {
     id: { type: DataTypes.INTEGER, allowNull: false, autoIncrement: true, primaryKey: true },
     first_name: { type: DataTypes.STRING, allowNull: false, },
     second_name: { type: DataTypes.STRING, allowNull: false },
