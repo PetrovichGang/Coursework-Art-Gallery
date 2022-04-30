@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { createApp } from "vue";
 import App from "./App.vue";
+import 'viewerjs/dist/viewer.css'
+import VueViewer from 'v-viewer'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,4 +35,5 @@ const app = createApp(App);
 
 app.use(router);
 
+app.use(VueViewer)
 app.mount("#app");

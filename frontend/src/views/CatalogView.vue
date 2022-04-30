@@ -25,12 +25,6 @@ onMounted(update);
 
 <template>
   <div class="split">
-    <section>
-      <h1></h1>
-      <div>
-        <input />
-      </div>
-    </section>
     <section v-if="arts">
       <h1>
         Картины <small>{{ arts?.length }}</small>

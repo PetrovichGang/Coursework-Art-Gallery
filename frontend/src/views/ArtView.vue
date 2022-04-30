@@ -2,6 +2,7 @@
 import { useRoute } from "vue-router";
 import { onMounted, ref } from "vue";
 import { computed } from "vue";
+import 'viewerjs/dist/viewer.css'
 
 const art = ref(null);
 const error = ref(null);
@@ -28,8 +29,8 @@ onMounted(update);
 <template>
   <div class="split">
     <section v-if="art">
-      <div class="grid">
-        <img :src="art.image" class="artwork" />
+      <div class="grid" v-viewer="{toolbar: false, tooltip: false, button: false, navbar: false, keyboard: false}">
+        <img :src="art.image" class="artwork" @click="v.show()" />
         <div>
           <h2>«{{ art.name }}»</h2>
           <div>
@@ -155,5 +156,14 @@ h3 {
   margin-top: 0;
   margin-bottom: 12px;
   font-size: 1.25rem;
+}
+
+img {
+  transition: 0.25s ease;
+  cursor: pointer;
+}
+
+img:hover {
+  transform: scale(1.05);
 }
 </style>
