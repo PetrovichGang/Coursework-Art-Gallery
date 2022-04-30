@@ -15,7 +15,7 @@ const currentRoute = computed(() => useRoute().path);
   <div>
     <header>
       <nav>
-        <div class="logo">
+        <RouterLink to="/" class="logo">
           <img
             alt="ArtStoichev"
             src="@/assets/logo.svg"
@@ -26,7 +26,7 @@ const currentRoute = computed(() => useRoute().path);
             <h1>ArtStoichev</h1>
             <span>Картинная галерея</span>
           </div>
-        </div>
+        </RouterLink>
 
         <div class="search">
           <img src="@/assets/search.svg" width="24" height="24" />
@@ -100,6 +100,8 @@ header {
   display: flex;
   align-items: center;
   gap: 10px;
+  text-decoration: none;
+  color: #fff;
 }
 
 .logo div {

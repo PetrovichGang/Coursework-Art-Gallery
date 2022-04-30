@@ -5,12 +5,22 @@ import { onMounted, ref } from "vue";
 const arts = ref(null);
 const error = ref(null);
 
-onMounted(() => {
+const update = () => {
+  arts.value = null;
+  error.value = null;
   fetch("http://localhost:3000/artwork")
     .then((x) => x.json())
-    .then((x) => (arts.value = x))
+    .then((x) => {
+      if (x.length === 0) {
+        error.value = "Картины не найдены";
+      } else {
+        arts.value = x;
+      }
+    })
     .catch((x) => (error.value = x));
-});
+};
+
+onMounted(update);
 </script>
 
 <template>
@@ -37,7 +47,8 @@ onMounted(() => {
     </section>
     <section v-else-if="error">
       <h1>Ошибка</h1>
-      <span>{{ error }}</span>
+      <span>{{ error }}</span><br><br>
+      <button @click="update()">Перезагрузить</button>
     </section>
     <section v-else class="loading">
       <img
