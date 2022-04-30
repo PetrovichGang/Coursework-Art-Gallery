@@ -9,7 +9,7 @@ const router = createRouter({
     routes: [
         {
             path: "/",
-            name: "Каталог",
+            name: "Галерея",
             component: () => import("./views/CatalogView.vue"),
         },
         {
@@ -20,11 +20,11 @@ const router = createRouter({
         {
             path: "/contact",
             name: "Контакты",
-            component: () => import("./views/AboutView.vue"),
+            component: () => import("./views/ContactView.vue"),
         },
         {
             path: "/art/:id",
-            name: "Информация",
+            name: "Картина",
             meta: { hide: true },
             component: () => import("./views/ArtView.vue"),
         },

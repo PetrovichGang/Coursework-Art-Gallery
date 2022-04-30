@@ -32,16 +32,22 @@ onMounted(update);
       <div class="grid">
         <div v-for="art of arts" :key="art" class="item">
           <RouterLink :to="`/art/${art.id}`">
-            <img :src="art.image" alt="" srcset="" />
+            <div class="img" :style="{ backgroundImage: `url(${art.image})` }">
+              <img :src="art.image" />
+            </div>
             <span class="title">{{ art.name }}</span>
-            <span class="author">{{ art.Author }}</span>
+            <span class="author"
+              >{{ art.artist.first_name }} {{ art.artist.second_name }}
+              {{ art.artist.last_name }}</span
+            >
           </RouterLink>
         </div>
       </div>
     </section>
     <section v-else-if="error">
       <h1>Ошибка</h1>
-      <span>{{ error }}</span><br><br>
+      <span>{{ error }}</span
+      ><br /><br />
       <button @click="update()">Перезагрузить</button>
     </section>
     <section v-else class="loading">
@@ -66,6 +72,7 @@ onMounted(update);
   border: 1px solid #555;
   gap: 10px;
   text-decoration: none;
+  overflow: hidden;
 }
 
 .grid {
@@ -113,9 +120,22 @@ small {
   padding: 8px;
 }
 
-img {
+.img {
+  background-size: contain;
+}
+
+.img img {
+  margin-bottom: -4px;
   width: 320px;
   object-fit: contain;
   height: 250px;
+  backdrop-filter: blur(8px);
+}
+
+.author {
+  margin: 0 18px 16px;
+  opacity: 0.75;
+  text-transform: uppercase;
+  font-size: 0.75rem;
 }
 </style>

@@ -2,7 +2,7 @@
 import { useRoute } from "vue-router";
 import { onMounted, ref } from "vue";
 import { computed } from "vue";
-import 'viewerjs/dist/viewer.css'
+import "viewerjs/dist/viewer.css";
 
 const art = ref(null);
 const error = ref(null);
@@ -29,18 +29,29 @@ onMounted(update);
 <template>
   <div class="split">
     <section v-if="art">
-      <div class="grid" v-viewer="{toolbar: false, tooltip: false, button: false, navbar: false, keyboard: false}">
-        <img :src="art.image" class="artwork" @click="v.show()" />
-        <div>
+      <div
+        class="grid"
+        v-viewer="{
+          toolbar: false,
+          tooltip: false,
+          button: false,
+          navbar: false,
+          keyboard: false,
+        }"
+      >
+        <div class="img" :style="{ backgroundImage: `url(${art.image})` }">
+          <img :src="art.image" class="artwork" />
+        </div>
+        <div class="info">
           <h2>«{{ art.name }}»</h2>
           <div>
             <small>Размер: </small><span>{{ art.sizeX }}x{{ art.sizeY }}</span>
           </div>
           <div>
-            <small>Расположено в: </small><span>{{ art.location }}</span>
+            <small>Расположение: </small><span>{{ art.location }}</span>
           </div>
           <div>
-            <small>Создана: </small
+            <small>Написана: </small
             ><span>{{ new Date(art.created_date).toLocaleDateString() }}</span>
           </div>
           <h2 v-if="art.description != ''">Описание</h2>
@@ -50,15 +61,18 @@ onMounted(update);
             <img :src="art.artist.image" />
             <div>
               <h3>
-                {{ `${art.artist.first_name} ${art.artist.second_name} ${art.artist.last_name}` }}
+                {{ art.artist.first_name }} {{ art.artist.second_name }}
+                {{ art.artist.last_name }}
               </h3>
               <div>
-                <small>Дата рождения: </small><span>{{
+                <small>Дата рождения: </small
+                ><span>{{
                   new Date(art.artist.birth_date).toLocaleDateString()
                 }}</span>
               </div>
               <div v-if="art.artist.death_date">
-                <small>Дата смерти: </small><span>{{
+                <small>Дата смерти: </small
+                ><span>{{
                   new Date(art.artist.death_date).toLocaleDateString()
                 }}</span>
               </div>
@@ -72,7 +86,8 @@ onMounted(update);
     </section>
     <section v-else-if="error">
       <h1>Ошибка</h1>
-      <span>{{ error }}</span><br><br>
+      <span>{{ error }}</span
+      ><br /><br />
       <button @click="update()">Перезагрузить</button>
     </section>
     <section v-else class="loading">
@@ -110,7 +125,7 @@ section {
   gap: 32px;
 }
 
-.grid > div {
+.grid > .info {
   flex-grow: 1;
 }
 
@@ -136,8 +151,9 @@ section {
 .artwork {
   height: 500px;
   object-fit: contain;
-  object-position: top;
+  backdrop-filter: blur(8px);
   width: 500px;
+  margin-bottom: -4px;
 }
 
 small {
@@ -164,6 +180,6 @@ img {
 }
 
 img:hover {
-  transform: scale(1.05);
+  transform: scale(1.025);
 }
 </style>

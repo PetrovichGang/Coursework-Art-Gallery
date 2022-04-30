@@ -94,6 +94,7 @@ header {
   background: var(--dark-1-trans);
   backdrop-filter: blur(10px);
   box-shadow: 0 0 4px #000;
+  z-index: 10;
 }
 
 .logo {
