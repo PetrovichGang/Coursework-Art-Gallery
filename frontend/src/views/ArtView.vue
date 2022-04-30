@@ -22,11 +22,19 @@ onMounted(() => {
         <img :src="art.image" alt="" />
         <div>
           <h1>{{ art.name }}</h1>
-          <div>
-            <i>Размер: </i><span>{{ `${art.sizeX}x${art.sizeY}` }}</span>
+          <div class="author grid">
+            <img :src="art.artist.image">
+            <div>
+              <h2>{{ `${art.artist.first_name} ${art.artist.second_name} ${art.artist.last_name}` }}</h2>
+              <div><i>Дата рождения: </i><span>{{ new Date(art.artist.birth_date).toLocaleDateString() }}</span></div>
+              <div v-if="art.artist.death_date">
+                <i>Дата смерти: </i><span>{{ new Date(art.artist.death_date).toLocaleDateString() }}</span>
+              </div>
+              <div><i>Страна: </i><span>{{ art.artist.country }}</span></div>
+            </div>
           </div>
           <div>
-            <i>Автор: </i><span class="author">{{ art.Author }}</span>
+            <i>Размер: </i><span>{{ `${art.sizeX}x${art.sizeY}` }}</span>
           </div>
           <div>
             <i>Расположено в: </i><span>{{ art.location }}</span>
@@ -54,38 +62,26 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.item {
-  display: flex;
-  flex-direction: column;
-  border-radius: 8px;
-  background: #fff;
+.author > img {
+  width: 120px;
+  height: 120px
+}
+
+.author {
   padding: 24px;
-  border: 1px solid #ddd;
-  gap: 10px;
+  background: var(--dark-2);
+  border-radius: 16px;
+  border: 1px solid var(--dark-3);
 }
 
 .grid {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 24px;
+  gap: 32px;
 }
 
 .title {
   font-weight: 600;
   font-size: 1.25rem;
-}
-
-.goto {
-  font-weight: 600;
-  text-decoration: none;
-  width: 100%;
-  background: var(--accent);
-  color: #000;
-  padding: 8px;
-  text-align: center;
-  border-radius: 4px;
-  margin-top: 8px;
 }
 
 .loading {
@@ -100,12 +96,6 @@ onMounted(() => {
   gap: 32px;
   width: 100%;
   padding: 0 16px;
-}
-
-small {
-  font-weight: 400;
-  color: #666;
-  padding: 8px;
 }
 
 img {
