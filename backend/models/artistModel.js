@@ -8,8 +8,9 @@ const Artist = db.define('artist', {
     last_name: { type: DataTypes.STRING, allowNull: false },
     birth_date: { type: DataTypes.DATEONLY, allowNull: false },
     death_date: { type: DataTypes.DATEONLY, allowNull: true },
-    image: { type: DataTypes.STRING, allowNull: true },
-    country: { type: DataTypes.STRING, allowNull: false }
+    image: { type: DataTypes.STRING(500), allowNull: true },
+    country: { type: DataTypes.STRING, allowNull: false },
+    description: { type: DataTypes.STRING(1000), allowNull: true },
 }, { timestamps: false })
 
 export default Artist
