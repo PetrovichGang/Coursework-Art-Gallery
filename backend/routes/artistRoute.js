@@ -2,7 +2,7 @@ import Artist from "../models/artistModel.js"
 
 export async function getArtists(req){
     if(req.query.offset)
-        return await Artist.findAll({ limit: 5, offset: ((+req.query.offset ?? 0) -1 ) * 5 })
+        return await Artist.findAll({ limit: 20, offset: ((+req.query.offset ?? 0) -1 ) * 20 })
     else
         return await Artist.findAll()
 }
