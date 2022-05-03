@@ -9,7 +9,7 @@ export const artist = {
 
 export const artwork = {
     name: "Castle of the mocha",
-    authorId: 1,
+    authorId: null,
     created_date: "2090-01-01",
     description: "power full rock music in picture",
     sizeX: 100.444,
