@@ -12,7 +12,7 @@ export const fastify = init({ logger: CONFIG.logger })
 fastify.register(fastifyCors, { origin: true })
 
 Association()
-db.sync({force: false})
+db.sync({ force: false })
 
 fastify.get("/artwork", (req) => artworkRoute.getArtworks(req))
 fastify.get("/artwork/:id", (req) => artworkRoute.getArtworkById(req))
