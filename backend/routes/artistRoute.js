@@ -1,10 +1,16 @@
 import Artist from "../models/artistModel.js"
 
 export async function getArtists(req){
-    if(req.query.offset)
-        return await Artist.findAll({ limit: 20, offset: ((+req.query.offset ?? 0) -1 ) * 20 })
-    else
-        return await Artist.findAll()
+    const { offset, q } = req.query
+    const where = q ? {where: { name: { [Op.like]: `%${q}%` } }} : {}
+    return await Artist.findAll({
+        ...where,
+        limit: 20,
+        offset: (+(offset ?? 1) -1 ) * 20,
+        include: [
+            { model: Artist }
+        ]
+    })
 }
 export async function getArtistById(req){
     return await Artist.findAll({ where: { id: req.params.id } })
