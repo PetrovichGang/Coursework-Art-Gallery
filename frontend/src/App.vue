@@ -14,20 +14,19 @@ const currentRoute = computed(() => useRoute().path);
 <template>
   <div>
     <header>
+      <RouterLink to="/" class="logo">
+        <img
+          alt="ArtStoichev"
+          src="@/assets/logo.svg"
+          width="36"
+          height="36"
+        />
+        <div>
+          <h1>GayStation</h1>
+          <span>Картинная галерея</span>
+        </div>
+      </RouterLink>
       <nav>
-        <RouterLink to="/" class="logo">
-          <img
-            alt="ArtStoichev"
-            src="@/assets/logo.svg"
-            width="36"
-            height="36"
-          />
-          <div>
-            <h1>GayStation</h1>
-            <span>Картинная галерея</span>
-          </div>
-        </RouterLink>
-
         <div class="search">
           <img src="@/assets/search.svg" width="24" height="24" />
           <input type="text" />
@@ -90,7 +89,7 @@ header {
   width: 100%;
   height: 72px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   background: var(--dark-1-trans);
   backdrop-filter: blur(10px);
   box-shadow: 0 0 4px #000;
@@ -103,6 +102,7 @@ header {
   gap: 10px;
   text-decoration: none;
   color: #fff;
+  margin-inline: 20px;
 }
 
 .logo div {
@@ -173,7 +173,6 @@ header {
 header > nav {
   display: flex;
   align-items: center;
-  width: 1400px;
   height: 100%;
   justify-content: space-between;
   padding: 0 8px 0 16px;
