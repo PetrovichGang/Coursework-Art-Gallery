@@ -17,8 +17,9 @@ const Artist = db.define('artist', {
             }
         }
     },
-    image: { type: DataTypes.STRING, allowNull: true },
-    country: { type: DataTypes.STRING, allowNull: false }
+    image: { type: DataTypes.STRING(500), allowNull: true },
+    country: { type: DataTypes.STRING, allowNull: false },
+    description: { type: DataTypes.STRING(1000), allowNull: true }
 }, { timestamps: false })
 
 export default Artist

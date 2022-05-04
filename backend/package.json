@@ -15,5 +15,8 @@
     "fastify-cors": "^6.0.3",
     "mariadb": "^3.0.0",
     "sequelize": "^6.19.0"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^6.3.1"
   }
 }
