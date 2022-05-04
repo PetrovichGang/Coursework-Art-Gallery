@@ -86,6 +86,10 @@ onMounted(update);
   margin: 8px 18px 0;
   font-weight: 600;
   font-size: 1.25rem;
+  text-overflow: ellipsis;
+    width: 280px;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .goto {
