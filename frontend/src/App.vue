@@ -23,7 +23,7 @@ const currentRoute = computed(() => useRoute().path);
             height="36"
           />
           <div>
-            <h1>ArtStoichev</h1>
+            <h1>GayStation</h1>
             <span>Картинная галерея</span>
           </div>
         </RouterLink>

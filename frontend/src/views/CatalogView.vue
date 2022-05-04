@@ -35,11 +35,16 @@ onMounted(update);
             <div class="img" :style="{ backgroundImage: `url(${art.image})` }">
               <img :src="art.image" />
             </div>
-            <span class="title">{{ art.name }}</span>
-            <span class="author"
-              >{{ art.artist.first_name }} {{ art.artist.second_name }}
-              {{ art.artist.last_name }}</span
-            >
+          </RouterLink>
+          <RouterLink :to="`/art/${art.id}`" class="title">
+            {{ art.name }}
+          </RouterLink>
+          <RouterLink :to="`/artist/${art.artist.id}`">
+            <span class="author">
+            <img class="avatar" :src="art.artist.image">
+              {{ art.artist.first_name }} {{ art.artist.second_name }}
+              {{ art.artist.last_name }}
+            </span>
           </RouterLink>
         </div>
       </div>
@@ -62,7 +67,7 @@ onMounted(update);
 </template>
 
 <style scoped>
-.item a {
+.item {
   display: flex;
   flex-direction: column;
   border-radius: 8px;
@@ -87,9 +92,13 @@ onMounted(update);
   font-weight: 600;
   font-size: 1.25rem;
   text-overflow: ellipsis;
-    width: 280px;
-    white-space: nowrap;
-    overflow: hidden;
+  width: 280px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+a{
+  color: #fff;
+  text-decoration: none;
 }
 
 .goto {
@@ -141,5 +150,14 @@ small {
   opacity: 0.75;
   text-transform: uppercase;
   font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.avatar {
+  margin-right: 8px;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
 }
 </style>
