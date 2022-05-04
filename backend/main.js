@@ -16,6 +16,7 @@ db.sync({ force: false })
 
 fastify.get("/artwork", (req) => artworkRoute.getArtworks(req))
 fastify.get("/artwork/:id", (req) => artworkRoute.getArtworkById(req))
+fastify.get("/artwork/author/:authorId", (req) => artworkRoute.getArtworkByArtistId(req))
 fastify.get("/artwork/delete", () => artworkRoute.deleteArtworks())
 fastify.get("/artwork/delete/:id", (req) => artworkRoute.deleteArtworkById(req))
 fastify.post("/artwork/update/:id", (req) => artworkRoute.updateArtwork(req))

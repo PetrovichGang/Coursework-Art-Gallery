@@ -17,6 +17,9 @@ export async function getArtworks(req){
 export async function getArtworkById(req){
     return await Artwork.findAll({ where: { id: req.params.id }, include: [{ model: Artist }] })
 }
+export async function getArtworkByArtistId(req){
+    return await Artwork.findAll({ where: { authorId: req.params.authorId } })
+}
 export async function deleteArtworkById(req){
     return await Artwork.destroy({ where: { id: req.params.id }})
 }
