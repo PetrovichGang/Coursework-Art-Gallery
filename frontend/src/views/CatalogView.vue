@@ -16,6 +16,7 @@ const update = () => {
         error.value = "Картины не найдены";
       } else {
         arts.value = x;
+        document.title = "GayStation"
       }
     })
     .catch((x) => (error.value = x));

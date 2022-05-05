@@ -16,6 +16,12 @@ const router = createRouter({
             path: "/artists",
             name: "Авторы",
             component: () => import("./views/ArtistListView.vue"),
+            props: async (route) => {
+                if(route.query.offset)
+                    return { query: route.query.offset }
+                else
+                    return { query: route.query.offset = 1 }
+            }
         },
         {
             path: "/about",
