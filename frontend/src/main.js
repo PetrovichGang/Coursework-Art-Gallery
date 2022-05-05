@@ -13,6 +13,11 @@ const router = createRouter({
             component: () => import("./views/CatalogView.vue"),
         },
         {
+            path: "/artists",
+            name: "Авторы",
+            component: () => import("./views/ArtistListView.vue"),
+        },
+        {
             path: "/about",
             name: "О нас",
             component: () => import("./views/AboutView.vue"),

@@ -3,6 +3,7 @@
     import { onMounted, ref } from "vue"
     import { computed } from "vue"
     import "viewerjs/dist/viewer.css"
+    import ArtworkItem from "../components/ArtworkItem.vue"
 
     const artist = ref(null)
     const artworks = ref(null)
@@ -72,16 +73,7 @@
                 </div>
             </div>
             <section class="artworks" v-if="artworks">
-                <div v-for="artwork in artworks" :key="artwork" class="artwork-item">
-                    <div class="artwork-image">
-                        <RouterLink :to="`/art/${artwork.id}`">
-                            <div class="img" :style="{ backgroundImage: `url(${artwork.image})` }" style="background-repeat: no-repeat;">
-                                <img :src="artwork.image" class="artwork-image" />
-                            </div>
-                        </RouterLink>
-                    </div>
-                    
-                </div>
+              <artwork-item v-for="artwork in artworks" :key="artwork" :art="artwork"/>
             </section>
         </div>
         </section>
@@ -160,18 +152,6 @@
     align-items: stretch;
   }
 
-  .title {
-    font-weight: 600;
-    font-size: 1.15rem;
-  }
-
-  .loading {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-  }
-
   .split {
     display: flex;
     gap: 32px;
@@ -186,22 +166,6 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
-  }
-
-  .artwork-image {
-    height: 200px;
-    object-fit: contain;
-    backdrop-filter: blur(8px);
-    width: 200px;
-    margin-bottom: -4px;
-    border-radius: 16px;
-  }
-  .img{
-    border-radius: 16px;
-  }
-
-  .artwork-item{
-    margin-right: 10px;
   }
 
   a{

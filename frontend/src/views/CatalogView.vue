@@ -1,6 +1,7 @@
 <script setup>
 import { RouterLink } from "vue-router";
-import { onMounted, ref } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
+import ArtworkItem from "../components/ArtworkItem.vue"
 
 const arts = ref(null);
 const error = ref(null);
@@ -30,23 +31,7 @@ onMounted(update);
         Картины <small>{{ arts?.length }}</small>
       </h1>
       <div class="grid">
-        <div v-for="art of arts" :key="art" class="item">
-          <RouterLink :to="`/art/${art.id}`">
-            <div class="img" :style="{ backgroundImage: `url(${art.image})` }">
-              <img :src="art.image" />
-            </div>
-          </RouterLink>
-          <RouterLink :to="`/art/${art.id}`" class="title">
-            {{ art.name }}
-          </RouterLink>
-          <RouterLink :to="`/artist/${art.artist.id}`">
-            <span class="author">
-            <img class="avatar" :src="art.artist.image">
-              {{ art.artist.first_name }} {{ art.artist.second_name }}
-              {{ art.artist.last_name }}
-            </span>
-          </RouterLink>
-        </div>
+        <artwork-item :art="art" v-for="art in arts" :key="art" />
       </div>
     </section>
     <section v-else-if="error">
