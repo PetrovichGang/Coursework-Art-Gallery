@@ -189,7 +189,7 @@ onMounted(update);
     cursor: pointer;
   }
 
-  img:hover {
+  .author img:hover {
     transform: scale(1.025);
   }
 </style>

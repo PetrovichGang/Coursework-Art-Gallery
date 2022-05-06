@@ -22,6 +22,5 @@ export async function updateArtist(req) {
     return await Artist.update(req.body, { where: { id: req.params.id } })
 }
 export async function createArtist(req){
-    // return await Artist.create(req.body)
-    console.log(req.body)
+    return await Artist.create(req.body)
 }
