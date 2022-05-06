@@ -31,10 +31,9 @@
         flex-direction: column;
         border-radius: 8px;
         background: #303234;
-        padding: 0px;
+        padding-block: 14px;
         color: #fff;
         border: 1px solid #555;
-        gap: 10px;
         text-decoration: none;
         overflow: hidden;
     }

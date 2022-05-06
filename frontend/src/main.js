@@ -41,9 +41,14 @@ const router = createRouter({
         },
         {
             path: "/artist/:id",
-            name: "Художник",
+            name: "Автор",
             meta: { hide: true },
             component: () => import("./views/ArtistView.vue"),
+        },
+        {
+            path: "/artist/create",
+            name: "Добавить автора",
+            component: () => import("./views/ArtistCreateView.vue"),
         },
     ],
 });

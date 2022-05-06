@@ -20,9 +20,9 @@ const update = () => {
       }
     })
     .catch((x) => (error.value = x));
-};
+}
 
-onMounted(update);
+onMounted(update)
 </script>
 
 <template>
@@ -37,8 +37,8 @@ onMounted(update);
     </section>
     <section v-else-if="error">
       <h1>Ошибка</h1>
-      <span>{{ error }}</span
-      ><br /><br />
+      <span>{{ error }}</span>
+      <br><br>
       <button @click="update()">Перезагрузить</button>
     </section>
     <section v-else class="loading">
