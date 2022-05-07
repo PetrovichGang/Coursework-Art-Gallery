@@ -22,5 +22,8 @@ export async function updateArtist(req) {
     return await Artist.update(req.body, { where: { id: req.params.id } })
 }
 export async function createArtist(req){
-    return await Artist.create(req.body)
+    if(req.body._value)
+        return await Artist.create(req.body._value) // ОТ КЛИЕНТА ПРИХОДИТ КРИВОЕ БАДИ
+    else
+        return await Artist.create(req.body)
 }
