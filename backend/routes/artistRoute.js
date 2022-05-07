@@ -23,7 +23,7 @@ export async function updateArtist(req) {
 }
 export async function createArtist(req){
     if(req.body._value)
-        return await Artist.create(req.body._value) // ОТ КЛИЕНТА ПРИХОДИТ КРИВОЕ БАДИ
+        return await Artist.create(req.body._value) // ОТ КЛИЕНТА ПРИХОДИТ КРИВОЕ БАДИ, ПРОБЛЕМА ПОШЛА ОТ РЕАКТОВСКОГО СИНТАКСИСА
     else
         return await Artist.create(req.body)
 }

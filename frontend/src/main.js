@@ -50,6 +50,11 @@ const router = createRouter({
             name: "Добавить автора",
             component: () => import("./views/ArtistCreateView.vue"),
         },
+        {
+            path: "/artwork/create",
+            name: "Добавить работу",
+            component: () => import("./views/ArtworkCreateView.vue"),
+        }
     ],
 });
 

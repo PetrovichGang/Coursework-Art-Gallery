@@ -24,10 +24,10 @@
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(artist)
+            body: JSON.stringify(artist.value)
             
         })
-            .then(() => artist = JSON.stringify(artist))
+            .then(() => this.$router.push("/artists"))
             .catch((x) => (error.value = x))
     }
     
