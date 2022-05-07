@@ -22,8 +22,5 @@ export async function updateArtist(req) {
     return await Artist.update(req.body, { where: { id: req.params.id } })
 }
 export async function createArtist(req){
-    if(req.body._value)
-        return await Artist.create(req.body._value) // ОТ КЛИЕНТА ПРИХОДИТ КРИВОЕ БАДИ, ПРОБЛЕМА ПОШЛА ОТ РЕАКТОВСКОГО СИНТАКСИСА
-    else
-        return await Artist.create(req.body)
+    return await Artist.create(req.body)
 }
