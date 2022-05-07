@@ -1,16 +1,19 @@
 <script setup>
-    import { RouterLink, useRoute } from "vue-router"
-    import { defineComponent, onMounted, ref, computed } from "vue"
+    import { RouterLink, useRoute, useRouter } from "vue-router"
+    import { defineComponent, onMounted, ref, computed, watch } from "vue"
     import ArtistItem from "../components/ArtistItem.vue"
 
     const artists = ref(null)
     const error = ref(null)
-    const offset = computed(() => useRoute().query.offset)
+    const router = useRouter()
+    const route = useRoute()
+    const offset = route.query.offset  ?? 1
+    console.log(offset)
 
-    const update = () => {
+    const update = (offs) => {
         artists.value = null;
         error.value = null;
-        fetch(`http://localhost:3000/artist?offset=${offset.value}`)
+        fetch(`http://localhost:3000/artist?offset=${offs}`)
             .then((x) => x.json())
             .then((x) => {
                 if (x.length === 0) {
@@ -23,7 +26,10 @@
             .catch((x) => (error.value = x))
     }
 
-    onMounted(update)
+    onMounted(() => update(offset))
+    watch(useRoute(), (x, y) => {
+        console.log(useRoute().query.offset  ?? 1)
+    })
 </script>
 
 
@@ -36,6 +42,7 @@
             <div class="grid">
                 <artist-item  v-for="artist in artists" :key="artist" :artist="artist"/>
             </div>
+            <button @click="router.push({ path: 'artists', query: { offset: +offset+1 }})">ио</button>
         </section>
         <section v-else-if="error">
             <h1>Ошибка</h1>

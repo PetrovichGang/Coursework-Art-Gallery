@@ -14,7 +14,8 @@ const currentRoute = computed(() => useRoute().path);
 <template>
   <div>
     <header>
-      <RouterLink to="/" class="logo">
+      <nav>
+        <RouterLink to="/" class="logo">
         <img
           alt="ArtStoichev"
           src="@/assets/logo.svg"
@@ -26,11 +27,6 @@ const currentRoute = computed(() => useRoute().path);
           <span>Картинная галерея</span>
         </div>
       </RouterLink>
-      <nav>
-        <div class="search">
-          <img src="@/assets/search.svg" width="24" height="24" />
-          <input type="text" />
-        </div>
 
         <div class="links">
           <RouterLink
@@ -42,6 +38,10 @@ const currentRoute = computed(() => useRoute().path);
             {{ route.name }}
           </RouterLink>
         </div>
+        <!--div class="search">
+          <img src="@/assets/search.svg" width="24" height="24" />
+          <input type="text" />
+        </div-->
       </nav>
     </header>
     <div class="main-content">
@@ -64,6 +64,7 @@ body {
   text-rendering: optimizeLegibility;
   background: var(--dark-0);
   color: #fff;
+  overflow: overlay;
 }
 
 * {
@@ -79,6 +80,10 @@ body {
   --dark-3: #424346;
   --dark-4: #535457;
 }
+
+* {
+  box-sizing: border-box;
+}
 </style>
 
 <style scoped>
@@ -89,7 +94,7 @@ header {
   width: 100%;
   height: 72px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   background: var(--dark-1-trans);
   backdrop-filter: blur(10px);
   box-shadow: 0 0 4px #000;
@@ -174,8 +179,8 @@ header > nav {
   display: flex;
   align-items: center;
   height: 100%;
-  justify-content: space-between;
-  padding: 0 8px 0 16px;
+  justify-content: flex-start;
+  width: 1400px;
 }
 
 .main-content {

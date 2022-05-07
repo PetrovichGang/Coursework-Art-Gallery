@@ -15,13 +15,7 @@ const router = createRouter({
         {
             path: "/artists",
             name: "Авторы",
-            component: () => import("./views/ArtistListView.vue"),
-            props: async (route) => {
-                if(route.query.offset)
-                    return { query: route.query.offset }
-                else
-                    return { query: route.query.offset = 1 }
-            }
+            component: () => import("./views/ArtistListView.vue")
         },
         {
             path: "/about",
@@ -48,12 +42,19 @@ const router = createRouter({
         {
             path: "/artist/create",
             name: "Добавить автора",
+            meta: { hide: true },
             component: () => import("./views/ArtistCreateView.vue"),
         },
         {
             path: "/artwork/create",
             name: "Добавить работу",
+            meta: { hide: true },
             component: () => import("./views/ArtworkCreateView.vue"),
+        },
+        {
+            path: "/create",
+            name: "Добавить",
+            component: () => import("./views/CreateView.vue"),
         }
     ],
 });
