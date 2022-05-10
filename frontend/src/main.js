@@ -10,7 +10,7 @@ const router = createRouter({
         {
             path: "/",
             name: "Галерея",
-            component: () => import("./views/CatalogView.vue"),
+            component: () => import("./views/ArtworkListView.vue"),
         },
         {
             path: "/artists",
@@ -31,7 +31,7 @@ const router = createRouter({
             path: "/art/:id",
             name: "Картина",
             meta: { hide: true },
-            component: () => import("./views/ArtView.vue")
+            component: () => import("./views/ArtworkView.vue")
         },
         {
             path: "/artist/:id",

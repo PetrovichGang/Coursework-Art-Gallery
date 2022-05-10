@@ -1,6 +1,7 @@
 <script setup>
 import { RouterLink, RouterView, useRoute, useRouter } from "vue-router";
 import { computed } from "vue";
+import { CONFIG } from "./config.js";
 
 const routes = computed(() =>
   useRouter()
@@ -16,17 +17,17 @@ const currentRoute = computed(() => useRoute().path);
     <header>
       <nav>
         <RouterLink to="/" class="logo">
-        <img
-          alt="ArtStoichev"
-          src="@/assets/logo.svg"
-          width="36"
-          height="36"
-        />
-        <div>
-          <h1>GayStation</h1>
-          <span>Картинная галерея</span>
-        </div>
-      </RouterLink>
+          <img
+            alt="ArtStoichev"
+            src="@/assets/logo.svg"
+            width="36"
+            height="36"
+          />
+          <div>
+            <h1>{{ CONFIG.appName }}</h1>
+            <span>Картинная галерея</span>
+          </div>
+        </RouterLink>
 
         <div class="links">
           <RouterLink
@@ -38,10 +39,10 @@ const currentRoute = computed(() => useRoute().path);
             {{ route.name }}
           </RouterLink>
         </div>
-        <!--div class="search">
+        <div class="search">
           <img src="@/assets/search.svg" width="24" height="24" />
           <input type="text" />
-        </div-->
+        </div>
       </nav>
     </header>
     <div class="main-content">
@@ -54,7 +55,8 @@ const currentRoute = computed(() => useRoute().path);
 
 <style>
 body,
-input {
+input,
+button {
   font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -73,6 +75,7 @@ body {
 
 :root {
   --accent: #008dd4;
+  --accent-trans: #008dd444;
   --dark-0: #161819;
   --dark-1: #202124;
   --dark-1-trans: #20212488;
@@ -83,6 +86,23 @@ body {
 
 * {
   box-sizing: border-box;
+}
+
+.action-button {
+  color: #fff;
+  background: var(--accent-trans);
+  padding: 16px 24px;
+  margin: 32px 0;
+  border-radius: 16px;
+  text-decoration: none;
+  border: 0;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.button-block {
+  display: flex;
+  gap: 16px;
 }
 </style>
 
@@ -139,17 +159,17 @@ header {
 }
 
 .search {
+  width: 100%;
+  margin-left: auto;
   background: var(--dark-2);
   color: #fff;
   box-shadow: 0 2px 8px #0002;
-  margin: 0 12px;
   padding: 12px;
   border-radius: 8px;
   display: flex;
   justify-content: center;
   gap: 8px;
-  max-width: 600px;
-  width: 100%;
+  max-width: 300px;
 }
 
 .search input {
