@@ -139,17 +139,20 @@
     /* border: 1px solid var(--dark-3); */
     margin-bottom: 16px;
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
     align-content: center;
     justify-content: center;
     align-items: center;
-    gap: 16px;
+    gap: 32px;
+    flex-shrink: 0;
   }
 
   .author-description{
-      width: 20%;
       word-wrap: break-word;
+      height: 100px;
+      flex-grow: 1;
+      border-left: 1px solid #b1b1b1;
+      padding-left: 24px;
   }
 
   .grid {
