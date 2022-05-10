@@ -13,6 +13,11 @@ const router = createRouter({
             component: () => import("./views/CatalogView.vue"),
         },
         {
+            path: "/artists",
+            name: "Авторы",
+            component: () => import("./views/ArtistListView.vue")
+        },
+        {
             path: "/about",
             name: "О нас",
             component: () => import("./views/AboutView.vue"),
@@ -30,10 +35,27 @@ const router = createRouter({
         },
         {
             path: "/artist/:id",
-            name: "Художник",
+            name: "Автор",
             meta: { hide: true },
             component: () => import("./views/ArtistView.vue"),
         },
+        {
+            path: "/artist/create",
+            name: "Добавить автора",
+            meta: { hide: true },
+            component: () => import("./views/ArtistCreateView.vue"),
+        },
+        {
+            path: "/artwork/create",
+            name: "Добавить работу",
+            meta: { hide: true },
+            component: () => import("./views/ArtworkCreateView.vue"),
+        },
+        {
+            path: "/create",
+            name: "Добавить",
+            component: () => import("./views/CreateView.vue"),
+        }
     ],
 });
 

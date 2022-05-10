@@ -1,26 +1,29 @@
 <script setup>
-import { RouterLink } from "vue-router";
-import { onMounted, ref } from "vue";
+  import { CONFIG } from "../config.js"
+  import { RouterLink } from "vue-router";
+  import { defineComponent, onMounted, ref } from "vue";
+  import ArtworkItem from "../components/ArtworkItem.vue"
 
-const arts = ref(null);
-const error = ref(null);
+  const arts = ref(null);
+  const error = ref(null);
 
-const update = () => {
-  arts.value = null;
-  error.value = null;
-  fetch("http://localhost:3000/artwork")
-    .then((x) => x.json())
-    .then((x) => {
-      if (x.length === 0) {
-        error.value = "Картины не найдены";
-      } else {
-        arts.value = x;
-      }
-    })
-    .catch((x) => (error.value = x));
-};
+  const update = () => {
+    arts.value = null;
+    error.value = null;
+    fetch(`${CONFIG.server.ip}:${CONFIG.server.port}/artwork`)
+      .then((x) => x.json())
+      .then((x) => {
+        if (x.length === 0) {
+          error.value = "Картины не найдены";
+        } else {
+          arts.value = x;
+          document.title = "GayStation"
+        }
+      })
+      .catch((x) => (error.value = x));
+  }
 
-onMounted(update);
+  onMounted(update)
 </script>
 
 <template>
@@ -30,29 +33,13 @@ onMounted(update);
         Картины <small>{{ arts?.length }}</small>
       </h1>
       <div class="grid">
-        <div v-for="art of arts" :key="art" class="item">
-          <RouterLink :to="`/art/${art.id}`">
-            <div class="img" :style="{ backgroundImage: `url(${art.image})` }">
-              <img :src="art.image" />
-            </div>
-          </RouterLink>
-          <RouterLink :to="`/art/${art.id}`" class="title">
-            {{ art.name }}
-          </RouterLink>
-          <RouterLink :to="`/artist/${art.artist.id}`">
-            <span class="author">
-            <img class="avatar" :src="art.artist.image">
-              {{ art.artist.first_name }} {{ art.artist.second_name }}
-              {{ art.artist.last_name }}
-            </span>
-          </RouterLink>
-        </div>
+        <artwork-item :art="art" v-for="art in arts" :key="art" />
       </div>
     </section>
     <section v-else-if="error">
       <h1>Ошибка</h1>
-      <span>{{ error }}</span
-      ><br /><br />
+      <span>{{ error }}</span>
+      <br><br>
       <button @click="update()">Перезагрузить</button>
     </section>
     <section v-else class="loading">

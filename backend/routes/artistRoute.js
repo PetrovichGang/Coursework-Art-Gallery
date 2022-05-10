@@ -6,10 +6,7 @@ export async function getArtists(req){
     return await Artist.findAll({
         ...where,
         limit: 20,
-        offset: (+(offset ?? 1) -1 ) * 20,
-        include: [
-            { model: Artist }
-        ]
+        offset: (+(offset ?? 1) -1 ) * 20
     })
 }
 export async function getArtistById(req){
