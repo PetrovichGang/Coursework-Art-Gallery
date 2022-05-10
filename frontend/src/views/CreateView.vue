@@ -8,7 +8,7 @@
     <div class="form">
       <h1>Добавить...</h1>
       <RouterLink class="action-button" to="/artwork/create">Работу</RouterLink>
-      <RouterLink class="action-button" to="/artist/create">Артиста</RouterLink>
+      <RouterLink class="action-button" to="/artist/create">Автора</RouterLink>
     </div>
   </div>
 </template>

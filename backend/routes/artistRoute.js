@@ -1,7 +1,10 @@
 import Artist from "../models/artistModel.js"
 
 export async function getArtists(req){
-    const { offset, q } = req.query
+    const { offset, q, all } = req.query
+    if (all) {
+        return await Artist.findAll({attributes: ['first_name', 'second_name', 'id']})
+    }
     const where = q ? {where: { name: { [Op.like]: `%${q}%` } }} : {}
     return await Artist.findAll({
         ...where,
