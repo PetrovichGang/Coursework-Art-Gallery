@@ -58,13 +58,13 @@ watch(useRoute(), (x, y) => update(y.query.offset ?? 1));
       <h1>Ошибка</h1>
       <span>{{ error }}</span>
       <div class="button-block">
-      <RouterLink
-        class="action-button"
-        v-if="offset > 1"
-        :to="{ path: 'artists', query: { offset: +offset - 1 } }">
-        Назад
-      </RouterLink>
-      <button class="action-button" @click="update()">Перезагрузить</button>
+        <RouterLink
+          class="action-button"
+          v-if="offset > 1"
+          :to="{ path: 'artists', query: { offset: +offset - 1 } }">
+          Назад
+        </RouterLink>
+        <button class="action-button" @click="update(offset)">Перезагрузить</button>
       </div>
     </section>
     <section v-else class="loading">

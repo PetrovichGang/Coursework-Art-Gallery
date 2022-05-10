@@ -7,8 +7,8 @@
   <div class="wrap">
     <div class="form">
       <h1>Добавить...</h1>
-      <RouterLink to="/artwork/create">Работу</RouterLink>
-      <RouterLink to="/artist/create">Артиста</RouterLink>
+      <RouterLink class="action-button" to="/artwork/create">Работу</RouterLink>
+      <RouterLink class="action-button" to="/artist/create">Артиста</RouterLink>
     </div>
   </div>
 </template>
@@ -26,14 +26,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-a {
-  
-    background: var(--accent);
-    padding: 8px 12px;
-    border-radius: 6px;
-    color: #fff;
-    border: 0;
-    text-decoration: none;
 }
 </style>

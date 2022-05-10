@@ -31,6 +31,9 @@ watch(useRoute(), (x, y) => update(y.query.offset ?? 1));
 
 <template>
   <div class="split">
+    <section v-if="arts?.length == 0">
+      <h1>Здесь пусто</h1>
+    </section>
     <section v-if="arts">
       <h1>
         Картины <small>страница {{ offset }}</small>
@@ -56,8 +59,15 @@ watch(useRoute(), (x, y) => update(y.query.offset ?? 1));
     <section v-else-if="error">
       <h1>Ошибка</h1>
       <span>{{ error }}</span>
-      <br /><br />
-      <button @click="update()">Перезагрузить</button>
+      <div class="button-block">
+        <RouterLink
+          class="action-button"
+          v-if="offset > 1"
+          :to="{ path: '/', query: { offset: +offset - 1 } }">
+          Назад
+        </RouterLink>
+        <button class="action-button" @click="update(offset)">Перезагрузить</button>
+      </div>
     </section>
     <section v-else class="loading">
       <img
@@ -75,13 +85,6 @@ watch(useRoute(), (x, y) => update(y.query.offset ?? 1));
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
-}
-
-.loading {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
 }
 
 .split {

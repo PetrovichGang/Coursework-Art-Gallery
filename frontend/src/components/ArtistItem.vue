@@ -42,6 +42,11 @@ a {
   flex-shrink: 0;
 }
 
+a.justText {
+  cursor: text;
+  pointer-events: none;
+}
+
 a:not(.justText) {
   padding: 24px;
   background: var(--dark-2);

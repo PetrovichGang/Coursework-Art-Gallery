@@ -52,7 +52,7 @@
                 <option v-for="country in countries" :key="country" :value="country.name.common">{{ country.name.common }}</option>
             </select>
             <input type="text" placeholder="Ссылка на аватар" v-model="artist.image">
-            <button @click="create">Добавить</button>
+            <button class="action-button" @click="create">Добавить</button>
         </div>
     </div>
 </template>
@@ -83,11 +83,7 @@ input, select {
 }
 
 button {
-    background: var(--accent);
-    padding: 8px 12px;
     border-radius: 6px;
-    color: #fff;
-    border: 0;
     margin-top: 16px;
 }
 </style>

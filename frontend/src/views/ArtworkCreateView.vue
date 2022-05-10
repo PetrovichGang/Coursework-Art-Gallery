@@ -52,7 +52,7 @@
                 <option v-for="artist in artists" :key="artist" :value="artist.id">{{ `${artist.first_name} ${artist.second_name}` }}</option>
             </select>
             <input type="text" v-model="artwork.image" placeholder="Ссылка на изображение">
-            <button @click="create">Добавить</button>
+            <button class="action-button" @click="create">Добавить</button>
         </div>
     </div>
 </template>
@@ -83,11 +83,7 @@ input, select {
 }
 
 button {
-    background: var(--accent);
-    padding: 8px 12px;
     border-radius: 6px;
-    color: #fff;
-    border: 0;
     margin-top: 16px;
 }
 </style>

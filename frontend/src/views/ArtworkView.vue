@@ -123,13 +123,6 @@ a {
   font-size: 1.25rem;
 }
 
-.loading {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-}
-
 .split {
   display: flex;
   gap: 32px;

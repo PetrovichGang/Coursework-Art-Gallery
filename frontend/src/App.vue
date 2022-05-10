@@ -39,10 +39,10 @@ const currentRoute = computed(() => useRoute().path);
             {{ route.name }}
           </RouterLink>
         </div>
-        <div class="search">
+        <!--div class="search">
           <img src="@/assets/search.svg" width="24" height="24" />
           <input type="text" />
-        </div>
+        </div-->
       </nav>
     </header>
     <div class="main-content">
@@ -92,7 +92,6 @@ body {
   color: #fff;
   background: var(--accent-trans);
   padding: 16px 24px;
-  margin: 32px 0;
   border-radius: 16px;
   text-decoration: none;
   border: 0;
@@ -103,6 +102,15 @@ body {
 .button-block {
   display: flex;
   gap: 16px;
+  margin: 32px 0;
+}
+
+.loading {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 64px;
 }
 </style>
 
