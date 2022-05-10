@@ -14,7 +14,7 @@ const router = useRouter();
 
 const getArtists = () => {
   error.value = null;
-  fetch(`${CONFIG.server.ip}:${CONFIG.server.port}/artist?all=true`)
+  fetch(`${CONFIG.apiUrl}/artist?all=true`)
     .then((result) => {
       result.json().then((result) => {
         artists.value = result;
@@ -26,7 +26,7 @@ const getArtists = () => {
 const update = () => {
   error.value = null;
   fetch(
-    `${CONFIG.server.ip}:${CONFIG.server.port}/artwork/update/${props.artwork.id}`,
+    `${CONFIG.apiUrl}/artwork/update/${props.artwork.id}`,
     {
       method: "POST",
       headers: {

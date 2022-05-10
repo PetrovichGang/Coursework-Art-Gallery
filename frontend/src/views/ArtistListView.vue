@@ -12,7 +12,7 @@ const offset = computed(() => useRoute().query.offset ?? 1);
 const update = (offs) => {
   artists.value = null;
   error.value = null;
-  fetch(`${CONFIG.server.ip}:${CONFIG.server.port}/artist?offset=${offs}`)
+  fetch(`${CONFIG.apiUrl}/artist?offset=${offs}`)
     .then((x) => x.json())
     .then((x) => {
       if (x.length === 0) {

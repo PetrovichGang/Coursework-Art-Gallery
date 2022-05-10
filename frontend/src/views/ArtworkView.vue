@@ -16,7 +16,7 @@ const router = useRouter();
 const update = () => {
   art.value = null;
   error.value = null;
-  fetch(`${CONFIG.server.ip}:${CONFIG.server.port}/artwork/${id.value}`)
+  fetch(`${CONFIG.apiUrl}/artwork/${id.value}`)
     .then((x) => x.json())
     .then((x) => {
       if (x.length === 0) {
@@ -31,7 +31,7 @@ const update = () => {
 };
 
 const deleteArt = () => {
-  fetch(`${CONFIG.server.ip}:${CONFIG.server.port}/artwork/delete/${id.value}`)
+  fetch(`${CONFIG.apiUrl}/artwork/delete/${id.value}`)
     .then((x) => {
       if (x.ok) {
         router.push('/');

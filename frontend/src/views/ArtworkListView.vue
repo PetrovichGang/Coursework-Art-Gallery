@@ -12,7 +12,7 @@ const offset = computed(() => useRoute().query.offset ?? 1);
 const update = (offs) => {
   arts.value = null;
   error.value = null;
-  fetch(`${CONFIG.server.ip}:${CONFIG.server.port}/artwork?offset=${offs}`)
+  fetch(`${CONFIG.apiUrl}/artwork?offset=${offs}`)
     .then((x) => x.json())
     .then((x) => {
       document.title = CONFIG.appName;

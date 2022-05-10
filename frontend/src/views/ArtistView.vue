@@ -17,7 +17,7 @@ const update = () => {
   artist.value = null;
   artistError.value = null;
   artworks.value = null;
-  fetch(`${CONFIG.server.ip}:${CONFIG.server.port}/artist/${id.value}`)
+  fetch(`${CONFIG.apiUrl}/artist/${id.value}`)
     .then((x) => x.json())
     .then((x) => {
       if (x.length === 0) {
@@ -30,7 +30,7 @@ const update = () => {
     })
     .catch((x) => (artistError.value = x));
 };
-fetch(`${CONFIG.server.ip}:${CONFIG.server.port}/artwork/author/${id.value}`)
+fetch(`${CONFIG.apiUrl}/artwork/author/${id.value}`)
   .then((x) => x.json())
   .then((x) => {
     if (x.length === 0) artworkError.value = "Картины не найдены";

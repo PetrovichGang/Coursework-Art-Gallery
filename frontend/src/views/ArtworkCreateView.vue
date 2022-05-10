@@ -12,7 +12,7 @@ const router = useRouter()
 
 const getArtists = () => {
   error.value = null;
-  fetch(`${CONFIG.server.ip}:${CONFIG.server.port}/artist?all=true`)
+  fetch(`${CONFIG.apiUrl}/artist?all=true`)
     .then((result) => {
       result.json().then((result) => {
         artists.value = result;
@@ -23,7 +23,7 @@ const getArtists = () => {
 
 const create = () => {
   error.value = null;
-  fetch(`${CONFIG.server.ip}:${CONFIG.server.port}/artwork/create`, {
+  fetch(`${CONFIG.apiUrl}/artwork/create`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -49,7 +49,7 @@ const uploadFile = () => {
     filesCache = fileInput.value.files[0]
     const formData = new FormData();
     formData.append('file', fileInput.value.files[0]);
-    fetch(`${CONFIG.server.ip}:${CONFIG.server.port}/upload`, {method: "POST", body: formData})
+    fetch(`${CONFIG.apiUrl}/upload`, {method: "POST", body: formData})
         .then(x => x.json())
         .then(x => {
             if (x.statusCode == undefined)

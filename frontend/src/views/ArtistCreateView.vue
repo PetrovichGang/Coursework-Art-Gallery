@@ -23,7 +23,7 @@ const getCountries = () => {
 
 const create = () => {
   error.value = null;
-  fetch(`${CONFIG.server.ip}:${CONFIG.server.port}/artist/create`, {
+  fetch(`${CONFIG.apiUrl}/artist/create`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -49,7 +49,7 @@ const uploadFile = () => {
     filesCache = fileInput.value.files[0]
     const formData = new FormData();
     formData.append('file', fileInput.value.files[0]);
-    fetch(`${CONFIG.server.ip}:${CONFIG.server.port}/upload`, {method: "POST", body: formData})
+    fetch(`${CONFIG.apiUrl}/upload`, {method: "POST", body: formData})
         .then(x => x.json())
         .then(x => {
             if (x.statusCode == undefined)
