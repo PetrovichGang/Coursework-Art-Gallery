@@ -2,6 +2,14 @@ import { CONFIG } from "./config.js"
 
 import { fastify as init} from "fastify"
 import fastifyCors from "fastify-cors"
+import fastifyMultipart from '@fastify/multipart'
+import { randomUUID } from 'crypto'
+import { promisify } from 'util'
+import { pipeline } from 'stream' 
+import * as fs from 'fs' 
+import * as mimetypes from 'mime-types' 
+import { getMimeType } from 'stream-mime-type'
+const pump = promisify(pipeline)
 
 import { db } from "./models/database.js"
 import Association from "./models/associations.js"
@@ -10,6 +18,7 @@ import * as artistRoute from "./routes/artistRoute.js"
 
 export const fastify = init({ logger: CONFIG.logger })
 fastify.register(fastifyCors, { origin: true })
+fastify.register(fastifyMultipart)
 
 Association()
 db.sync({ force: false })
@@ -28,5 +37,14 @@ fastify.get("/artist/delete", () => artistRoute.deleteArtists())
 fastify.get("/artist/delete/:id", (req) => artistRoute.deleteArtistById(req))
 fastify.post("/artist/update/:id", (req) => artistRoute.updateArtist(req))
 fastify.post("/artist/create", (req) => artistRoute.createArtist(req))
+
+fastify.post('/upload', async (req) => {
+    const data = await req.file({ limits: { fileSize: 5242880 } }) // 5mb
+    const { mime, stream } = await getMimeType(data.file)
+    const ext = mimetypes.extension(mime)
+    const uuid = randomUUID()
+    await pump(stream, fs.createWriteStream(`${CONFIG.filesDir}/${uuid}.${ext}`))
+    return { name: `//${CONFIG.website}/static/${uuid}.${ext}` }
+})
 
 fastify.listen(CONFIG.port, err => { if(err) throw err })

@@ -7,5 +7,6 @@ export const CONFIG = {
 	website: 'localhost',
 	ip: 'localhost',
 	port: 3000,
-	logger: true
+	logger: true,
+	filesDir: 'D:/xampp/htdocs/static'
 }
