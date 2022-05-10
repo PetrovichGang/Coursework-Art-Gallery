@@ -1,4 +1,5 @@
 <script setup>
+    import { CONFIG } from "../config.js"
     import { RouterLink, useRoute } from "vue-router"
     import { defineComponent, onMounted, ref, computed, onUpdated } from "vue"
 
@@ -9,7 +10,7 @@
 
     const getArtists = () => {
         error.value = null
-        fetch("http://localhost:3000/artist").then((result) => {
+        fetch(`${CONFIG.server.ip}:${CONFIG.server.port}/artist`).then((result) => {
             result.json().then((result) => {
                 artists.value = result
             })
@@ -18,7 +19,7 @@
 
     const create = () => {
         error.value = null
-        fetch("http://localhost:3000/artwork/create", {
+        fetch(`${CONFIG.server.ip}:${CONFIG.server.port}/artwork/create`, {
             method: "POST",
             headers: {
                 'Accept': 'application/json',

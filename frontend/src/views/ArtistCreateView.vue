@@ -1,4 +1,5 @@
 <script setup>
+    import { CONFIG } from "../config.js"
     import { RouterLink, useRoute } from "vue-router"
     import { defineComponent, onMounted, ref, computed, onUpdated } from "vue"
 
@@ -18,7 +19,7 @@
 
     const create = () => {
         error.value = null
-        fetch("http://localhost:3000/artist/create", {
+        fetch(`${CONFIG.server.ip}:${CONFIG.server.port}/artist/create`, {
             method: "POST",
             headers: {
                 'Accept': 'application/json',

@@ -1,4 +1,5 @@
 <script setup>
+    import { CONFIG } from "../config.js"
     import { useRoute } from "vue-router"
     import { onMounted, ref } from "vue"
     import { computed } from "vue"
@@ -15,7 +16,7 @@
     artist.value = null
     artistError.value = null
     artworks.value = null
-    fetch(`http://localhost:3000/artist/${id.value}`)
+    fetch(`${CONFIG.server.ip}:${CONFIG.server.port}/artist/${id.value}`)
         .then((x) => x.json())
         .then((x) => {
             if (x.length === 0) artistError.value = "Автор не найдена"
@@ -26,7 +27,7 @@
         })
         .catch((x) => (artistError.value = x))
     }
-    fetch(`http://localhost:3000/artwork/author/${id.value}`)
+    fetch(`${CONFIG.server.ip}:${CONFIG.server.port}/artwork/author/${id.value}`)
         .then((x) => x.json())
         .then((x) => {
             if (x.length === 0) artworkError.value = "Картины не найдены"

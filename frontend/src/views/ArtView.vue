@@ -1,31 +1,32 @@
 <script setup>
-import { useRoute } from "vue-router";
-import { onMounted, ref } from "vue";
-import { computed } from "vue";
-import "viewerjs/dist/viewer.css";
+  import { CONFIG } from "../config.js"
+  import { useRoute } from "vue-router";
+  import { onMounted, ref } from "vue";
+  import { computed } from "vue";
+  import "viewerjs/dist/viewer.css";
 
-const art = ref(null);
-const error = ref(null);
-const id = computed(() => useRoute().params.id);
+  const art = ref(null);
+  const error = ref(null);
+  const id = computed(() => useRoute().params.id);
 
-const update = () => {
-  art.value = null;
-  error.value = null;
-  fetch(`http://localhost:3000/artwork/${id.value}`)
-    .then((x) => x.json())
-    .then((x) => {
-      if (x.length === 0) {
-        error.value = "Картина не найдена";
-      } else {
-        art.value = x[0];
-        document.title = x[0].name
-      }
-    })
-    .catch((x) => (error.value = x));
-};
+  const update = () => {
+    art.value = null;
+    error.value = null;
+    fetch(`${CONFIG.server.ip}:${CONFIG.server.port}/artwork/${id.value}`)
+      .then((x) => x.json())
+      .then((x) => {
+        if (x.length === 0) {
+          error.value = "Картина не найдена";
+        } else {
+          art.value = x[0];
+          document.title = x[0].name
+        }
+      })
+      .catch((x) => (error.value = x));
+  };
 
 
-onMounted(update);
+  onMounted(update);
 </script>
 
 <template>

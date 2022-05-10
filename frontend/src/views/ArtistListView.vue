@@ -1,4 +1,5 @@
 <script setup>
+    import { CONFIG } from "../config.js"
     import { RouterLink, useRoute, useRouter } from "vue-router"
     import { defineComponent, onMounted, ref, computed, watch } from "vue"
     import ArtistItem from "../components/ArtistItem.vue"
@@ -13,7 +14,7 @@
     const update = (offs) => {
         artists.value = null;
         error.value = null;
-        fetch(`http://localhost:3000/artist?offset=${offs}`)
+        fetch(`${CONFIG.server.ip}:${CONFIG.server.port}/artist?offset=${offs}`)
             .then((x) => x.json())
             .then((x) => {
                 if (x.length === 0) {

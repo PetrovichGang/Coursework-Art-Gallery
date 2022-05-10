@@ -1,28 +1,29 @@
 <script setup>
-import { RouterLink } from "vue-router";
-import { defineComponent, onMounted, ref } from "vue";
-import ArtworkItem from "../components/ArtworkItem.vue"
+  import { CONFIG } from "../config.js"
+  import { RouterLink } from "vue-router";
+  import { defineComponent, onMounted, ref } from "vue";
+  import ArtworkItem from "../components/ArtworkItem.vue"
 
-const arts = ref(null);
-const error = ref(null);
+  const arts = ref(null);
+  const error = ref(null);
 
-const update = () => {
-  arts.value = null;
-  error.value = null;
-  fetch("http://localhost:3000/artwork")
-    .then((x) => x.json())
-    .then((x) => {
-      if (x.length === 0) {
-        error.value = "Картины не найдены";
-      } else {
-        arts.value = x;
-        document.title = "GayStation"
-      }
-    })
-    .catch((x) => (error.value = x));
-}
+  const update = () => {
+    arts.value = null;
+    error.value = null;
+    fetch(`${CONFIG.server.ip}:${CONFIG.server.port}/artwork`)
+      .then((x) => x.json())
+      .then((x) => {
+        if (x.length === 0) {
+          error.value = "Картины не найдены";
+        } else {
+          arts.value = x;
+          document.title = "GayStation"
+        }
+      })
+      .catch((x) => (error.value = x));
+  }
 
-onMounted(update)
+  onMounted(update)
 </script>
 
 <template>
