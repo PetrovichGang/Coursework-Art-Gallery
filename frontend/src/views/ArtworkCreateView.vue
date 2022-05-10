@@ -1,6 +1,6 @@
 <script setup>
 import { CONFIG } from "../config.js";
-import {  useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import { onMounted, ref } from "vue";
 
 const artwork = ref({ authorId: "" });

@@ -1,14 +1,17 @@
 <script setup>
 import { CONFIG } from "../config.js";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { onMounted, ref } from "vue";
 import { computed } from "vue";
 import "viewerjs/dist/viewer.css";
 import ArtistItem from "../components/ArtistItem.vue";
+import ArtworkEditDialog from "../components/ArtworkEditDialog.vue";
 
 const art = ref(null);
 const error = ref(null);
+const open = ref(false);
 const id = computed(() => useRoute().params.id);
+const router = useRouter();
 
 const update = () => {
   art.value = null;
@@ -23,6 +26,17 @@ const update = () => {
         art.value = x[0];
         document.title = `${x[0].name} — ${CONFIG.appName}`;
       }
+    })
+    .catch((x) => (error.value = x));
+};
+
+const deleteArt = () => {
+  fetch(`${CONFIG.server.ip}:${CONFIG.server.port}/artwork/delete/${id.value}`)
+    .then((x) => {
+      if (x.ok) {
+        router.push('/');
+      } else 
+      throw new Error(x.statusText)
     })
     .catch((x) => (error.value = x));
 };
@@ -66,6 +80,10 @@ onMounted(update);
           <span v-if="art.description != ''">{{ art.description }}</span>
           <h2>Автор</h2>
           <artist-item :artist="art.artist" />
+          <div class="button-block">
+            <button @click="open=true" class="action-button">Редактировать описание</button>
+            <button @click="deleteArt()" class="action-button">Удалить</button>
+          </div>
         </div>
       </div>
     </section>
@@ -83,12 +101,17 @@ onMounted(update);
         height="72"
       />
     </section>
+    <ArtworkEditDialog v-if="art" :open="open" :artwork="art" @closeModal="open=false;update()" />
   </div>
 </template>
 
 <style scoped>
 section {
   width: 100%;
+}
+
+.img {
+  height: 500px
 }
 
 a > img {
