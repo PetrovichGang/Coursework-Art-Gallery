@@ -1,18 +1,16 @@
+<script setup>
+import { ref } from 'vue'
+const loc = ref(location.hostname)
+</script>
+
 <template>
   <div class="contact">
     <h1>Наши контакты</h1>
-    <span>Телефон: 88005554545</span>
-    <span>Адрес:</span>
-    <span>Some:</span>
+    <p>Наш адрес: Иркутск, Переулок Сударева, 6</p>
+    <p>Телефон: +7 (914) 228 13 37</p>
+    <p>Почта: admin@{{ loc }}</p>
   </div>
 </template>
 
 <style>
-@media (min-width: 1024px) {
-  .contact {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
 </style>
