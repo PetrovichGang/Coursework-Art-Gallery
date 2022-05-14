@@ -46,6 +46,12 @@ const router = createRouter({
             component: () => import("./views/ArtistCreateView.vue"),
         },
         {
+            path: "/hello",
+            name: "Мир",
+            meta: { hide: true },
+            component: () => import("./views/NewPage.vue"),
+        },
+        {
             path: "/artwork/create",
             name: "Добавить работу",
             meta: { hide: true },
