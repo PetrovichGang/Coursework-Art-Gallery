@@ -48,7 +48,6 @@ const router = createRouter({
         {
             path: "/hello",
             name: "Мир",
-            meta: { hide: true },
             component: () => import("./views/NewPage.vue"),
         },
         {
