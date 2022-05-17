@@ -1,6 +1,7 @@
 export const artist = {
     first_name: "Stoldman",
     second_name: "Gref",
+    last_name: "Erty",
     birth_date: "2090-12-21",
     // death_date: "2000-02-01",
     image: "jeffrey-katzenberg-has-a-howard-schultz-problem-and-heres-why-that-matters-to-you.jpg",
