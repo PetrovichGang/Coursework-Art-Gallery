@@ -9,15 +9,13 @@ const fileInput = ref(null)
 
 const artists = ref([]);
 const router = useRouter()
+let filesCache = null
 
 const getArtists = () => {
   error.value = null;
   fetch(`${CONFIG.apiUrl}/artist?all=true`)
-    .then((result) => {
-      result.json().then((result) => {
-        artists.value = result;
-      });
-    })
+    .then((x) => x.json())
+    .then((x) => (artists.value = x))
     .catch((err) => (error.value = err));
 };
 
@@ -25,13 +23,9 @@ const create = () => {
   error.value = null;
   fetch(`${CONFIG.apiUrl}/artwork/create`, {
     method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(artwork.value),
-  })
-    .then((x) => x.json())
+  }).then((x) => x.json())
     .then((x) => {
         if (x.statusCode == undefined)
             router.push('/art/' + x.id);
@@ -40,12 +34,11 @@ const create = () => {
     })
     .catch((x) => (error.value = x));
 };
-let filesCache = null
+
 const uploadFile = () => {
-    if (filesCache == fileInput.value.files[0]) {
-        create()
-        return
-    }
+    if (filesCache == fileInput.value.files[0])
+        return create()
+        
     filesCache = fileInput.value.files[0]
     const formData = new FormData();
     formData.append('file', fileInput.value.files[0]);
@@ -59,7 +52,6 @@ const uploadFile = () => {
             create()
         })
         .catch((x) => (error.value = x));
-
 }
 
 onMounted(getArtists);
@@ -70,19 +62,11 @@ onMounted(getArtists);
     <div class="form">
       <h1>Добавить работу</h1>
       <input type="text" placeholder="Название" v-model="artwork.name" />
-      <input
-        type="date"
-        placeholder="Дата создания"
-        v-model="artwork.created_date"
-      />
+      <input type="date" placeholder="Дата создания" v-model="artwork.created_date" />
       <input type="text" placeholder="Описание" v-model="artwork.description" />
       <input type="number" placeholder="Высота" v-model="artwork.sizeX" />
       <input type="number" placeholder="Ширина" v-model="artwork.sizeY" />
-      <input
-        type="text"
-        placeholder="Расположение"
-        v-model="artwork.location"
-      />
+      <input type="text" placeholder="Расположение" v-model="artwork.location" />
       <select v-model="artwork.authorId">
         <option disabled selected value="">Выберите автора</option>
         <option v-for="artist in artists" :key="artist" :value="artist.id">
@@ -90,7 +74,6 @@ onMounted(getArtists);
         </option>
       </select>
       <input type="file" ref="fileInput" />
-
       <span v-if="error">{{ error }}</span>
       <button class="action-button" @click="uploadFile">Добавить</button>
     </div>

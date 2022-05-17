@@ -1,7 +1,3 @@
-<script setup>
-import { CONFIG } from '../config'
-</script>
-
 <template>
   <div class="about">
     <h1>О нас</h1>
@@ -29,34 +25,5 @@ import { CONFIG } from '../config'
       {{ CONFIG.appName }} – галерея для самовырожения всех возможных авторов
       без каких-либо ограничений.
     </p>
-    <div class="author">
-      <img :src="CONFIG.authorPicUrl" />
-      <div>
-        <h3>Даниил Стойчев</h3>
-          <span>Создатель галереи</span>
-      </div>
-    </div>
   </div>
 </template>
-
-<style scoped>
-.author {
-  display: flex;
-  gap: 32px;
-  color: #fff;
-  text-decoration: none;
-  flex-shrink: 0;
-}
-
-img {
-  border-radius: 120px;
-  width: 96px;
-  height: 96px;
-}
-
-h3 {
-  font-size: 24px;
-  margin-top: 16px;
-  margin-bottom: 8px;
-}
-</style>

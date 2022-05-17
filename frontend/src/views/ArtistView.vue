@@ -34,9 +34,7 @@ fetch(`${CONFIG.apiUrl}/artwork/author/${id.value}`)
   .then((x) => x.json())
   .then((x) => {
     if (x.length === 0) artworkError.value = "Картины не найдены";
-    else {
-      artworks.value = x;
-    }
+    else artworks.value = x;
   });
 
 onMounted(update);
@@ -71,12 +69,7 @@ onMounted(update);
       <button @click="update()">Перезагрузить</button>
     </section>
     <section v-else class="loading">
-      <img
-        alt="load logo"
-        src="@/assets/logo-load.svg"
-        width="72"
-        height="72"
-      />
+      <img src="@/assets/logo-load.svg" width="72" height="72" />
     </section>
   </div>
 </template>

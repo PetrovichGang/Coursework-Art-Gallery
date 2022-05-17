@@ -33,10 +33,10 @@ const update = () => {
 const deleteArt = () => {
   fetch(`${CONFIG.apiUrl}/artwork/delete/${id.value}`)
     .then((x) => {
-      if (x.ok) {
+      if (x.ok)
         router.push('/');
-      } else 
-      throw new Error(x.statusText)
+      else 
+        throw new Error(x.statusText)
     })
     .catch((x) => (error.value = x));
 };
@@ -49,19 +49,8 @@ onMounted(update);
     <section v-if="art">
       <div
         class="grid"
-        v-viewer="{
-          toolbar: false,
-          tooltip: false,
-          button: false,
-          navbar: false,
-          keyboard: false,
-        }"
-      >
-        <div
-          class="img"
-          :style="{ backgroundImage: `url(${art.image})` }"
-          style="background-repeat: no-repeat"
-        >
+        v-viewer="{ toolbar: false, tooltip: false, button: false, navbar: false, keyboard: false }">
+        <div class="img" :style="{ backgroundImage: `url(${art.image})` }">
           <img :src="art.image" class="artwork" />
         </div>
         <div class="info">
@@ -73,8 +62,8 @@ onMounted(update);
             <small>Расположение: </small><span>{{ art.location }}</span>
           </div>
           <div>
-            <small>Написана: </small
-            ><span>{{ new Date(art.created_date).toLocaleDateString() }}</span>
+            <small>Написана: </small>
+            <span>{{ new Date(art.created_date).toLocaleDateString() }}</span>
           </div>
           <h2 v-if="art.description != ''">Описание</h2>
           <span v-if="art.description != ''">{{ art.description }}</span>
@@ -89,17 +78,11 @@ onMounted(update);
     </section>
     <section v-else-if="error">
       <h1>Ошибка</h1>
-      <span>{{ error }}</span
-      ><br /><br />
-      <button @click="update()">Перезагрузить</button>
+      <span>{{ error }}</span><br /><br />
+      <button class="action-button" @click="update()">Перезагрузить</button>
     </section>
     <section v-else class="loading">
-      <img
-        alt="load logo"
-        src="@/assets/logo-load.svg"
-        width="72"
-        height="72"
-      />
+      <img src="@/assets/logo-load.svg" width="72" height="72" />
     </section>
     <ArtworkEditDialog v-if="art" :open="open" :artwork="art" @closeModal="open=false;update()" />
   </div>
@@ -111,7 +94,8 @@ section {
 }
 
 .img {
-  height: 500px
+  height: 500px;
+  background-repeat: no-repeat;
 }
 
 a > img {

@@ -17,12 +17,7 @@ const currentRoute = computed(() => useRoute().path);
     <header>
       <nav>
         <RouterLink to="/" class="logo">
-          <img
-            alt="ArtStoichev"
-            src="@/assets/logo.svg"
-            width="36"
-            height="36"
-          />
+          <img src="@/assets/logo.svg" width="36" height="36" />
           <div>
             <h1>{{ CONFIG.appName }}</h1>
             <span>Картинная галерея</span>
@@ -34,15 +29,10 @@ const currentRoute = computed(() => useRoute().path);
             v-for="route of routes"
             :to="route.path"
             :class="{ active: currentRoute == route.path }"
-            :key="route.path"
-          >
+            :key="route.path">
             {{ route.name }}
           </RouterLink>
         </div>
-        <!--div class="search">
-          <img src="@/assets/search.svg" width="24" height="24" />
-          <input type="text" />
-        </div-->
       </nav>
     </header>
     <div class="main-content">
@@ -54,12 +44,8 @@ const currentRoute = computed(() => useRoute().path);
 </template>
 
 <style>
-body,
-input,
-button {
-  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+body, input, button {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 body {
   font-size: 15px;
@@ -164,29 +150,6 @@ header {
   display: flex;
   gap: 8px;
   flex-shrink: 0;
-}
-
-.search {
-  width: 100%;
-  margin-left: auto;
-  background: var(--dark-2);
-  color: #fff;
-  box-shadow: 0 2px 8px #0002;
-  padding: 12px;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  max-width: 300px;
-}
-
-.search input {
-  background: inherit;
-  color: #fff;
-  font-size: 16px;
-  border: 0;
-  outline: none;
-  width: 100%;
 }
 
 .links a {

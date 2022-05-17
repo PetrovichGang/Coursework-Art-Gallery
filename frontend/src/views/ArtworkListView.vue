@@ -70,12 +70,7 @@ watch(useRoute(), (x, y) => update(y.query.offset ?? 1));
       </div>
     </section>
     <section v-else class="loading">
-      <img
-        alt="loading logo"
-        src="@/assets/logo-load.svg"
-        width="72"
-        height="72"
-      />
+      <img src="@/assets/logo-load.svg" width="72" height="72" />
     </section>
   </div>
 </template>

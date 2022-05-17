@@ -1,37 +1,21 @@
 <script setup>
 import { CONFIG } from "../config.js";
 import { useRouter } from "vue-router";
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 
-const artist = ref({ country: "" });
+const artist = ref({});
 const error = ref(null);
 const router = useRouter();
-const fileInput = ref(null)
-
-const countries = ref([]);
-
-const getCountries = () => {
-  error.value = null;
-  fetch("https://restcountries.com/v3.1/all")
-    .then((result) => {
-      result.json().then((result) => {
-        countries.value = result;
-      });
-    })
-    .catch((err) => (error.value = err));
-};
+const fileInput = ref(null);
+let filesCache = null;
 
 const create = () => {
   error.value = null;
   fetch(`${CONFIG.apiUrl}/artist/create`, {
     method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(artist.value),
-  })
-    .then((x) => x.json())
+  }).then((x) => x.json())
     .then((x) => {
       if (x.statusCode == undefined)
         router.push('/artist/' + x.id);
@@ -40,12 +24,11 @@ const create = () => {
     })
     .catch((x) => (error.value = x));
 };
-let filesCache = null
+
 const uploadFile = () => {
-    if (filesCache == fileInput.value.files[0]) {
-        create()
-        return
-    }
+    if (filesCache == fileInput.value.files[0])
+        return create()
+
     filesCache = fileInput.value.files[0]
     const formData = new FormData();
     formData.append('file', fileInput.value.files[0]);
@@ -59,10 +42,7 @@ const uploadFile = () => {
             create()
         })
         .catch((x) => (error.value = x));
-
 }
-
-onMounted(getCountries);
 </script>
 
 <template>
@@ -72,27 +52,10 @@ onMounted(getCountries);
       <input type="text" placeholder="Имя" v-model="artist.first_name" />
       <input type="text" placeholder="Отчество" v-model="artist.second_name" />
       <input type="text" placeholder="Фамилия" v-model="artist.last_name" />
-      <input
-        type="date"
-        placeholder="Дата рождения"
-        v-model="artist.birth_date"
-      />
-      <input
-        type="date"
-        placeholder="Дата смерти"
-        v-model="artist.death_date"
-      />
+      <input type="date" placeholder="Дата рождения" v-model="artist.birth_date" />
+      <input type="date" placeholder="Дата смерти" v-model="artist.death_date" />
       <input type="text" placeholder="Описание" v-model="artist.description" />
-      <select v-model="artist.country">
-        <option disabled selected value="">Выберите страну</option>
-        <option
-          v-for="country in countries"
-          :key="country"
-          :value="country.name.common"
-        >
-          {{ country.name.common }}
-        </option>
-      </select>
+      <input type="text" placeholder="Страна" v-model="artist.country" />
       <input type="file" ref="fileInput" />
       <span v-if="error">{{ error }}</span>
       <button class="action-button" @click="uploadFile">Добавить</button>
@@ -114,8 +77,7 @@ onMounted(getCountries);
   justify-content: center;
   align-items: center;
 }
-input,
-select {
+input, select {
   background: var(--dark-2);
   padding: 8px 12px;
   border-radius: 6px;
@@ -125,7 +87,6 @@ select {
 ::placeholder {
   color: #aaa;
 }
-
 button {
   border-radius: 6px;
   margin-top: 16px;
