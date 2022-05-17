@@ -1,3 +1,6 @@
+<script setup>
+import { CONFIG } from '../config.js'
+</script>
 <template>
   <div class="about">
     <h1>О нас</h1>
